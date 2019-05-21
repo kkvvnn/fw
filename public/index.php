@@ -1,21 +1,32 @@
 <?php
 
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
-echo $query;
 
 require '../vendor/core/Router.php';
 require '../vendor/libs/functions.php';
 
-// Router::add('posts/add', ['controller' => 'Post', 'action' => 'add']);
-// Router::add('posts', ['controller' => 'Post', 'action' => 'index']);
-// Router::add('', ['controller' => 'Main', 'action' => 'index']);
+define('WWW', __DIR__);
+define('CORE', dirname(__DIR__) . '/vendor/core');
+define('ROOT', dirname(__DIR__));
+define('APP', dirname(__DIR__) . '/app');
 
+// require '../app/controllers/Main.php';
+// require '../app/controllers/Posts.php';
+// require '../app/controllers/PostsNew.php';
+
+spl_autoload_register(function($class) {
+    $file = APP . "/controllers/$class.php";
+    if (is_file($file)) {
+        require_once $file;
+    }
+});
+
+Router::add('^pages/?(?P<action>[a-z-]+)?$', ['controller' => 'Posts']);
+
+// defualt routs
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
+Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 
 debug(Router::getRoutes());
 
-if (Router::matchRoute($query)) {
-    debug(Router::getRoute());
-} else {
-    echo 'Привет 404';
-}
+Router::dispatch($query);
