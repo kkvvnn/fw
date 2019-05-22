@@ -1,8 +1,13 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+ini_set('error_reporting', E_ALL);
+
+use vendor\core\Router;
+
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
-require '../vendor/core/Router.php';
 require '../vendor/libs/functions.php';
 
 define('WWW', __DIR__);
@@ -10,23 +15,18 @@ define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
 define('APP', dirname(__DIR__) . '/app');
 
-// require '../app/controllers/Main.php';
-// require '../app/controllers/Posts.php';
-// require '../app/controllers/PostsNew.php';
-
 spl_autoload_register(function($class) {
-    $file = APP . "/controllers/$class.php";
-    if (is_file($file)) {
+    $file = ROOT . '/' . str_replace('\\', '/', $class) . '.php';
+    if (file_exists($file)) {
         require_once $file;
     }
 });
 
-Router::add('^pages/?(?P<action>[a-z-]+)?$', ['controller' => 'Posts']);
+Router::add('^page/(?P<action>[a-z-]+)/(?P<alias>[a-z-]+)$', ['controller' => 'Page']);
+Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'view']);
 
 // defualt routs
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
-
-debug(Router::getRoutes());
 
 Router::dispatch($query);
