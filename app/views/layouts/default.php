@@ -19,13 +19,22 @@
     <![endif]-->
   </head>
   <body>
+
+    <div class="container">
+
+    <ul class="nav nav-pills">
+      <?php foreach ($menu as $item): ?>
+          <li><a href="category/<?= $item['id'] ?>"><?= $item['title'] ?></a></li>
+      <?php endforeach; ?>
+    </ul>
+
     <h1>Hello, world!</h1>
 
     <?= $content ?>
 
-    <?=debug(vendor\core\Db::$countSql)?>
-    <?=debug(vendor\core\Db::$queries)?>
-
+    <?php //debug(vendor\core\Db::$countSql)?>
+    <?php //debug(vendor\core\Db::$queries)?>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
