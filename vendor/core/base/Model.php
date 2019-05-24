@@ -30,8 +30,20 @@ abstract class Model {
     {
         $field = $field ?: $this->pk;
 
-        $this->sql = "SELECT * FROM {$this->table} WHERE $field = ? LIMIT 1";
+        $sql = "SELECT * FROM {$this->table} WHERE $field = ? LIMIT 1";
         return $this->pdo->query($sql, [$id]);
+    }
+
+    public function findBySql($sql, $params = [])
+    {
+        return $this->pdo->query($sql, $params);
+    }
+
+    public function findLike($str, $field, $table = '')
+    {
+        $table = $table ?: $this->table;
+        $sql ="SELECT * FROM $table WHERE $field LIKE ?";
+        return $this->pdo->query($sql, ['%' . $str . '%']);
     }
 
 }
