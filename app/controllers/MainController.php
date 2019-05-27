@@ -27,7 +27,15 @@ class MainController extends AppController {
 
     public function testAction()
     {
-        $this->layout = 'test';
+        $app = \vendor\core\Registry::instance();
+        $app->getList();
+        $app->test->go();
+        $app->test2 = '\vendor\libs\Test2';
+        $app->getList();
+        $app->test2->hello();
+        $this->setMeta('Homework');
+        $meta = $this->meta;
+        $this->set(compact('meta'));
     }
 
 }
