@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title><?= $meta['title'] ?></title>
-    <meta name="description" content="<?= $meta['desc'] ?>">
-    <meta name="keywords" content="<?= $meta['keywords'] ?>">
+    <title>DEFAULT | <?=$title?></title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,16 +21,8 @@
   <body>
 
     <div class="container">
-    
-    <?php if(!empty($menu)): ?>
-    <ul class="nav nav-pills">
-      <li><a href="page/about">About</a></li>
-      <?php foreach ($menu as $item): ?>
-          <li><a href="category/<?= $item['id'] ?>"><?= $item['title'] ?></a></li>
-      <?php endforeach; ?>
-    </ul>
-    <?php endif; ?>
 
+    Здесь нет меню
     <h1>Hello, world!</h1>
 
     <?= $content ?>
