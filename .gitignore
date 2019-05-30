@@ -1,3 +1,4 @@
 .vagrant/
 *.code-workspace
 .idea
+tmp/cache/*.txt
