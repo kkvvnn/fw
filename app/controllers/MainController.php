@@ -11,19 +11,10 @@ class MainController extends AppController {
 
     public function indexAction()
     {
-        // App::$app->getList();
-        \R::fancyDebug(true);
+        // \R::fancyDebug(true);
 
         $model = new Main;
-        $posts = App::$app->cache->get('posts');
-        if(!$posts) {
-            $posts = \R::findAll('posts');
-            App::$app->cache->set('posts', $posts, 3600*24);
-        }
- 
-        // echo date('Y-m-d H:i', time());
-        // echo '<br>';
-        // echo date('Y-m-d H:i', 1559161201);
+        $posts = \R::findAll('posts');
 
         $post = \R::findOne('posts', 'id = 1');
         
@@ -31,7 +22,6 @@ class MainController extends AppController {
 
         $title = 'PAGE TITLE';
         $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
-        // $this->setMeta($post->title, $post->description, $post->keywords);
 
         $meta = $this->meta;
         $this->set(compact('title', 'posts', 'menu', 'meta'));
@@ -40,7 +30,14 @@ class MainController extends AppController {
 
     public function testAction()
     {
-        $this->layout = 'test';
+        if($this->isAjax()){
+            echo 111;
+            die();
+        }
+
+        echo 222;
+
+        // $this->layout = false;
     }
 
 }
