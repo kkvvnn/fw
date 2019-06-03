@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-ini_set('error_reporting', E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// ini_set('error_reporting', E_ALL);
 
 use vendor\core\Router;
 use vendor\core\App;
@@ -11,6 +11,7 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
 
 require '../vendor/libs/functions.php';
 
+define('DEBUG', 0);
 define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));

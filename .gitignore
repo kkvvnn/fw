@@ -3,3 +3,4 @@
 .idea
 tmp/cache/*.txt
 public/test/error/*.log
+*.log

@@ -15,6 +15,7 @@ class MainController extends AppController {
         // \R::fancyDebug(true);
 
         $model = new Main;
+        echo $test;
         $posts = \R::findAll('posts');
 
         $post = \R::findOne('posts', 'id = 1');
