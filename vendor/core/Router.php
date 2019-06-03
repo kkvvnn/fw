@@ -63,11 +63,11 @@ class Router {
                     $cObj->$action();
                     $cObj->getView();
                 } else {
-                    // echo "Метод <b>$controller::$action()</b> не найден";
+                    echo "Метод <b>$controller::$action()</b> не найден";
                     throw new \Exception("Метод <b>$controller::$action()</b> не найден", 404);
                 }
             } else {
-                // echo "Контроллер <b>$controller</b> не найден";
+                echo "Контроллер <b>$controller</b> не найден";
                 throw new \Exception("Контроллер <b>$controller</b> не найден", 404);
             }
         } else {
