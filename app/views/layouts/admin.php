@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <?php \vendor\core\base\View::getMeta() ?>
+    <?php \fw\core\base\View::getMeta() ?>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,14 +23,11 @@
 
 <div class="container">
 
-    <?php if(!empty($menu)): ?>
         <ul class="nav nav-pills">
-            <li><a href="page/about">About</a></li>
-            <?php foreach ($menu as $item): ?>
-                <li><a href="category/<?= $item['id'] ?>"><?= $item['title'] ?></a></li>
-            <?php endforeach; ?>
+            <li><a href="/">Home</a></li>
+            <li><a href="/page/about">About</a></li>
+            <li><a href="/admin">Admin</a></li>
         </ul>
-    <?php endif; ?>
 
     <h1>Админка</h1>
 

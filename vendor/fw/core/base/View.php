@@ -1,8 +1,6 @@
 <?php
 
-namespace vendor\core\base;
-
-use mysql_xdevapi\Exception;
+namespace fw\core\base;
 
 class View {
 

@@ -4,11 +4,9 @@
 namespace app\controllers\admin;
 
 
-use vendor\core\base\View;
+use fw\core\base\View;
 
 class UserController extends AppController {
-
-    public $layout = 'default';
 
     public function indexAction()
     {
@@ -27,7 +25,7 @@ class UserController extends AppController {
 
     public function testAction()
     {
-        $this->layout = 'admin';
+        $this->layout = 'default';
     }
 
 }
