@@ -6,3 +6,4 @@ public/test/error/*.log
 *.log
 vendor/*
 !vendor/fw/
+phpmyadmin

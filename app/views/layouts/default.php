@@ -23,18 +23,15 @@
 
     <div class="container">
     
-<!--    --><?php //if(!empty($menu)): ?>
     <ul class="nav nav-pills">
       <li><a href="/">Home</a></li>
       <li><a href="/page/about">About</a></li>
       <li><a href="/admin">Admin</a></li>
-      <?php /*foreach ($menu as $item): */?><!--
-          <li><a href="category/<?/*= $item['id'] */?>"><?/*= $item['title'] */?></a></li>
-      --><?php /*endforeach; */?>
-    </ul>
-<!--    --><?php //endif; ?>
+      <li><a href="/user/signup">Signup</a></li>
+      <li><a href="/user/login">Login</a></li>
+      <li><a href="/user/logout">Logout</a></li>
 
-    <h1>Hello, world!</h1>
+    </ul>
 
     <?= $content ?>
 
