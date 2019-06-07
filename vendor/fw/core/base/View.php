@@ -39,6 +39,27 @@ class View {
         $this->view = $view;
     }
 
+    protected function compressPage($buffer)
+    {
+        $search = [
+            "/(\n)+/",
+            "/\r\n+/",
+            "/\n(\t)+/",
+            "/\n(\ )+/",
+            "/\>(\n)+</",
+            "/\>\r\n</",
+        ];
+        $replace = [
+            "\n",
+            "\n",
+            "\n",
+            "\n",
+            '><',
+            '><',
+        ];
+        return preg_replace($search, $replace, $buffer);
+    }
+
     public function render($vars)
     {
         if (is_array($vars)) {
@@ -48,16 +69,20 @@ class View {
         $prefix =str_replace('\\', '/', $this->route['prefix']);
         $file_view = APP . "/views/{$prefix}{$this->route['controller']}/{$this->view}.php";
 
-        ob_start();
+//        ob_start([$this, 'compressPage']);
+        ob_start('ob_gzhandler');
+        {
+            header("Content-encoding: gzip");
+            if (is_file($file_view)) {
+                require $file_view;
+            } else {
+                throw new \Exception("<p>Не найден вид <b>$file_view</b></p>", 404);
+            }
 
-        if (is_file($file_view)) {
-            require $file_view;
-        } else {
-//            echo "<p>Не найден вид <b>$file_view</b></p>";
-            throw new \Exception("<p>Не найден вид <b>$file_view</b></p>", 404);
+            $content = ob_get_contents();
         }
-
-        $content = ob_get_clean();
+        ob_clean();
+//        $content = ob_get_clean();
 
         if (false !== $this->layout) {
             $file_layout = APP . "/views/layouts/{$this->layout}.php";
@@ -71,7 +96,6 @@ class View {
 
                 require $file_layout;
             } else {
-//                echo "<p>Не найден шаблон <b>$file_layout</b></p>";
                 throw new \Exception("<p>Не найден шаблон <b>$file_layout</b></p>", 404);
             }
         }
