@@ -33,17 +33,16 @@ class MainController extends AppController {
 
         $total = \R::count('posts');
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $perpage = 1;
+        $perpage = 2;
 
         $pagination = new Pagination($page, $perpage, $total);
         $start = $pagination->getStart();
 
         $posts = \R::findAll('posts', "LIMIT $start, $perpage");
-        $menu = $this->menu;
 
-        View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
+        View::setMeta('Blog :: Главная страница', 'Описание страницы', 'Ключевые слова');
         
-        $this->set(compact('title', 'posts', 'menu', 'meta', 'pagination', 'total'));
+        $this->set(compact( 'posts', 'pagination', 'total'));
 
     }
 
