@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Main;
 use fw\core\base\View;
+use fw\libs\Pagination;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,26 +27,23 @@ class MainController extends AppController {
         $log->warning('Foo');
         $log->error('Bar');
 
-//        $mailer = new PHPMailer();
-//        var_dump($mailer);
-
         // \R::fancyDebug(true);
 
         $model = new Main;
-        // echo $test;
-        // trigger_error("E_USER_ERROR", E_USER_ERROR);
 
-        $posts = \R::findAll('posts');
-        $post = \R::findOne('posts', 'id = 1');
-        
+        $total = \R::count('posts');
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perpage = 1;
+
+        $pagination = new Pagination($page, $perpage, $total);
+        $start = $pagination->getStart();
+
+        $posts = \R::findAll('posts', "LIMIT $start, $perpage");
         $menu = $this->menu;
 
-        // $title = 'PAGE TITLE';
-        // $this->setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
-        // $meta = $this->meta;
         View::setMeta('Главная страница', 'Описание страницы', 'Ключевые слова');
         
-        $this->set(compact('title', 'posts', 'menu', 'meta'));
+        $this->set(compact('title', 'posts', 'menu', 'meta', 'pagination', 'total'));
 
     }
 

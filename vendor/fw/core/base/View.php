@@ -70,9 +70,9 @@ class View {
         $file_view = APP . "/views/{$prefix}{$this->route['controller']}/{$this->view}.php";
 
 //        ob_start([$this, 'compressPage']);
-        ob_start('ob_gzhandler');
+        ob_start();
         {
-            header("Content-encoding: gzip");
+//            header("Content-encoding: gzip");
             if (is_file($file_view)) {
                 require $file_view;
             } else {
