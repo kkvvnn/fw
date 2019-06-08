@@ -38,10 +38,10 @@ class UserController extends AppController {
             $user = new User();
             if($user->login()) {
                 $_SESSION['success'] = 'Вы успешно авторизованы';
+                redirect('/');
             } else {
                 $_SESSION['error'] ='Логин/пароль введены неверно';
             }
-            redirect('/');
         }
         View::setMeta('Вход');
     }
