@@ -33,7 +33,7 @@
     </ul>
 </div>
 <div class="categories">
-    <h3>CATEGORIES</h3>
+    <h3><?php __('categories');?></h3>
     <ul>
         <li><a href="#">Vivamus vestibulum nulla</a></li>
         <li><a href="#">Integer vitae libero ac risus e</a></li>
